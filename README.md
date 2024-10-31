@@ -83,38 +83,6 @@ git push -u origin main
 ### 8. Create Azure Pipeline YAML File
 In your project, create a `.github/workflows/azure-pipelines.yml` file with the following:
 
-```yaml
-trigger:
-  - main
-
-pool:
-  vmImage: 'ubuntu-latest'
-
-steps:
-  - task: UsePythonVersion@0
-    inputs:
-      versionSpec: '3.8'
-
-  - script: |
-      python -m venv antenv
-      source antenv/bin/activate
-      pip install --upgrade pip
-      pip install -r requirements.txt
-    displayName: 'Install dependencies'
-
-  - script: |
-      source antenv/bin/activate
-      python -m pytest
-    displayName: 'Run tests'
-
-  - task: AzureWebApp@1
-    inputs:
-      azureSubscription: '<your-service-connection-id>'
-      appName: '<your-app-name>'
-      package: $(System.DefaultWorkingDirectory)
-```
-
-Replace `<your-service-connection-id>` and `<your-app-name>` with the appropriate values.
 
 ### 9. Commit and Push to GitHub
 ```bash
