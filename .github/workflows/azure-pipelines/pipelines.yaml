@@ -1,0 +1,28 @@
+trigger:
+  - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.8'
+
+  - script: |
+      python -m venv antenv
+      source antenv/bin/activate
+      pip install --upgrade pip
+      pip install -r requirements.txt
+    displayName: 'Install dependencies'
+
+  - script: |
+      source antenv/bin/activate
+      python -m pytest
+    displayName: 'Run tests'
+
+  - task: AzureWebApp@1
+    inputs:
+      azureSubscription: 'MARZIHEIDARI_asp_3018'
+      appName: 'flask-ml-app'
+      package: $(System.DefaultWorkingDirectory)
