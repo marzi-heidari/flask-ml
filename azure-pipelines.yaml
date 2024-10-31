@@ -26,6 +26,6 @@ steps:
 
   - task: AzureWebApp@1
     inputs:
-      azureSubscription: 'MARZIHEIDARI_asp_3018'
+      azureSubscription: 'd56294f0-f5da-43a4-b993-02f521ee77b5'
       appName: 'flask-ml-app'
       package: $(System.DefaultWorkingDirectory)
